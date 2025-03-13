@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>スマホキーボード</title>
+</head>
+<body>
+  <textarea id="input" placeholder="Type here..."></textarea>
+
+  <script>
+    const socket = new WebSocket("wss://your-deno-deploy-url.deno.dev");
+
+    socket.addEventListener("open", () => {
+      console.log("Connected to server");
+    });
+
+    document.getElementById('input').addEventListener('input', (event) => {
+      const value = event.target.value;
+      socket.send(value);
+      event.target.value = '';
+    });
+  </script>
+</body>
+</html>
