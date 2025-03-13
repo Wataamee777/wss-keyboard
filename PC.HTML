@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>pc</title>
+</head>
+<body>
+  <script>
+const socket = new WebSocket("wss://wss-keyboard.deno.dev");
+
+socket.addEventListener("message", (event) => {
+  const value = event.data;
+  for (const char of value) {
+    const keyEvent = new KeyboardEvent("keydown", { key: char });
+    document.dispatchEvent(keyEvent);
+  }
+});
+<script>
+</body>
+</html>
